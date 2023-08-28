@@ -31,17 +31,29 @@ function handleChange(evento){
     })
   );
 }
-// function handleSubmit(event) {
-//   event.preventDefault();
-// setinputs([
-//   if(errors.length === 0){
-//   ])
-//   }
-
-// }
+function handleSubmit(evento) {
+  evento.preventDefault();
+   
+  if ( Object.values(errors).length === 0){
+    alert("Datos completos");
+ setinputs({
+  name:'',
+  email:'',
+  message:'',
+}
+)
+setErrors(validate({
+  name:'',
+  email:'',
+  message:'',
+}))
+ } else {
+  alert("Debe llenar todos los campos");
+ }
+}
 
   return <div>
-    <form>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="nombre">Nombre:</label>
       <input className={errors.name && 'warning'}
       name='name' placeholder="Escribe tu nombre..."
@@ -63,7 +75,7 @@ function handleChange(evento){
       onChange={handleChange}/>
       <p className='danger'>{errors.message}</p>
       <br/>
-      <button type='submit' onClick={handleSubmit}>Enviar</button>
+      <button type='submit'>Enviar</button>
     </form>
   </div>
 }
@@ -74,9 +86,11 @@ export function validate(inputs) {
 
   if (!inputs.name) {
     errors.name = 'Se requiere un nombre';
- }  if (!regexEmail.test(inputs.email)) {
+ } 
+  if (!regexEmail.test(inputs.email)) {
     errors.email = 'Debe ser un correo electrónico';
- }  if(!inputs.message){
+ } 
+  if(!inputs.message){
     errors.message =  "Se requiere un mensaje";
   } 
     
